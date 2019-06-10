@@ -70,9 +70,6 @@ public class ServletRegistrazione extends HttpServlet {
 		} 
 		catch(Exception e) 
 		{
-			//gestione dell'errore
-//			RequestDispatcher d = request.getRequestDispatcher("./view/accesso.jsp");
-//			d.forward(request,response);
 			e.printStackTrace();
 		}
 		
@@ -80,7 +77,7 @@ public class ServletRegistrazione extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

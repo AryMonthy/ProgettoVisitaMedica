@@ -52,22 +52,7 @@ public class StudioMedicoServlet extends HttpServlet {
 			RequestDispatcher d=request.getRequestDispatcher("./view/erroreLogIn.jsp");
 			d.include(request,response);
 		}
-//		else
-//		{
-//			String nome=l.getNome();
-//			String cognome=l.getCognome();
-//			String città= l.getCittà();
-//			String telefono = l.getTelefono();
-//			session.setAttribute("cf",cf);	
-//			session.setAttribute("nome",nome);
-//			session.setAttribute("cognome", cognome);
-//			session.setAttribute("città", città);
-//			session.setAttribute("telefono", telefono);
-//			RequestDispatcher d = request.getRequestDispatcher("./view/areaRiservata.jsp");
-//			d.forward(request,response);
-//		}
 	
-		
 		if(request.getParameter("push").equals("Login"))
 		{
 			String nome=l.getNome();
@@ -93,7 +78,7 @@ public class StudioMedicoServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 
