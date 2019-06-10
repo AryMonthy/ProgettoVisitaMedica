@@ -30,13 +30,13 @@ public class UtenteDaoImpl implements UtenteDao{
 		try
 		{
 			ps = dbConn.getConnection().prepareStatement(q);
-			ps.setString(1,"cf");
-			ps.setString(2,"nome");
-			ps.setString(3,"cognome");
+			ps.setString(1,u.getCf());
+			ps.setString(2,u.getNome());
+			ps.setString(3,u.getCognome());
 			ps.setDate(4,(Date)u.getDataNascita());
-			ps.setString(5,"città");
-			ps.setString(6,"telefono");
-			ps.setString(7,"password");
+			ps.setString(5,u.getCittà());
+			ps.setString(6,u.getTelefono());
+			ps.setString(7,u.getPassword());
 			ps.executeQuery();
 			ps.close();
 		} 
@@ -76,13 +76,13 @@ public class UtenteDaoImpl implements UtenteDao{
 		try
 		{
 			PreparedStatement ps=dbConn.getConnection().prepareStatement(q);
-			ps.setString(1,"cf");
-			ps.setString(2,"nome");
-			ps.setString(3,"cognome");
+			ps.setString(1,u.getCf());
+			ps.setString(2,u.getNome());
+			ps.setString(3,u.getCognome());
 			ps.setDate(4,(Date)u.getDataNascita());
-			ps.setString(5,"città");
-			ps.setString(6,"telefono");
-			ps.setString(7,"password");
+			ps.setString(5,u.getCittà());
+			ps.setString(6,u.getTelefono());
+			ps.setString(7,u.getPassword());
 			ps.executeUpdate();
 		} 
 		catch (SQLException e) 
@@ -99,7 +99,7 @@ public class UtenteDaoImpl implements UtenteDao{
 		try 
 		{
 			ps = dbConn.getConnection().prepareStatement(q);
-			ps.setString(1, "cf");
+			ps.setString(1, cf);
 			ps.executeQuery();
 		} 
 		catch (SQLException e) 
@@ -124,13 +124,13 @@ public class UtenteDaoImpl implements UtenteDao{
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 			{
-				ps.setString(1,"cf");
-				ps.setString(2,"nome");
-				ps.setString(3,"cognome");
+				ps.setString(1,u.getCf());
+				ps.setString(2,u.getNome());
+				ps.setString(3,u.getCognome());
 				ps.setDate(4,(Date)u.getDataNascita());
-				ps.setString(5,"città");
-				ps.setString(6,"telefono");
-				ps.setString(7,"password");
+				ps.setString(5,u.getCittà());
+				ps.setString(6,u.getTelefono());
+				ps.setString(7,u.getPassword());
 				lista.add(u);
 			}
 		} 
@@ -166,8 +166,8 @@ public class UtenteDaoImpl implements UtenteDao{
 			e.printStackTrace();
 		}
 		
-		
 		return u;
 	}
-
+	
+	
 }

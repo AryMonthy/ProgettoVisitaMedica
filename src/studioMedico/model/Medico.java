@@ -12,6 +12,12 @@ public class Medico {
 	public Medico ()
 	{}
 	
+	public Medico(String nome, String cognome, String telefono)
+	{
+		this.nome = nome;
+		this.cognome = cognome;
+		this.telefono = telefono;
+	}
 	
 	public Medico(String matricola, String nome, String cognome, String specializzazione, String telefono)
 	{

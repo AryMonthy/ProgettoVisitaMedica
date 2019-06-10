@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import studioMedico.model.Utente;
 import studioMedico.model.Dao.UtenteDao;
 import studioMedico.model.DaoImpl.UtenteDaoImpl;
 
@@ -40,26 +41,52 @@ public class StudioMedicoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cf= request.getParameter("cf");
 		String p = request.getParameter("password");
-		String nome=ut.logIn(cf,p).getNome();
+		Utente l= ut.logIn(cf,p);
 		
-		 
+		
+		
 		HttpSession session=request.getSession();
 		
-		if(ut.logIn(cf, p)==null)
+		if(l==null)
 		{
-			RequestDispatcher d=request.getRequestDispatcher("./view/erroreUtente.jsp");
+			RequestDispatcher d=request.getRequestDispatcher("./view/erroreLogIn.jsp");
 			d.include(request,response);
 		}
-		else
-		{
-			
-			session.setAttribute("cf",cf);	
-			session.setAttribute("nome",nome);
-			RequestDispatcher d = request.getRequestDispatcher("./view/accesso.jsp");
-			d.forward(request,response);
-		}
+//		else
+//		{
+//			String nome=l.getNome();
+//			String cognome=l.getCognome();
+//			String città= l.getCittà();
+//			String telefono = l.getTelefono();
+//			session.setAttribute("cf",cf);	
+//			session.setAttribute("nome",nome);
+//			session.setAttribute("cognome", cognome);
+//			session.setAttribute("città", città);
+//			session.setAttribute("telefono", telefono);
+//			RequestDispatcher d = request.getRequestDispatcher("./view/areaRiservata.jsp");
+//			d.forward(request,response);
+//		}
 	
 		
+		if(request.getParameter("push").equals("Login"))
+		{
+			String nome=l.getNome();
+			String cognome=l.getCognome();
+			String città= l.getCittà();
+			String telefono = l.getTelefono();
+			session.setAttribute("cf",cf);	
+			session.setAttribute("nome",nome);
+			session.setAttribute("cognome", cognome);
+			session.setAttribute("città", città);
+			session.setAttribute("telefono", telefono);
+			RequestDispatcher d = request.getRequestDispatcher("./view/areaRiservata.jsp");
+			d.forward(request,response);
+		}
+		if (request.getParameter("push").equals("Registrati"))
+		{
+			RequestDispatcher d=request.getRequestDispatcher("./view/registrazione.jsp");
+			d.include(request,response);
+		}
 	}
 
 	/**

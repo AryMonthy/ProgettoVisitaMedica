@@ -8,6 +8,7 @@ import java.util.List;
 
 import studioMedico.connection.DbConnection;
 import studioMedico.model.Medico;
+import studioMedico.model.Visita;
 import studioMedico.model.Dao.MedicoDao;
 
 public class MedicoDaoImpl implements MedicoDao {
@@ -15,6 +16,10 @@ public class MedicoDaoImpl implements MedicoDao {
 	private DbConnection dbConn;
 	PreparedStatement ps;
 	
+	public MedicoDaoImpl ()
+	{
+		dbConn = DbConnection.getDbConnection();
+	}
 	
 	@Override
 	public void aggiungi(Medico m)
@@ -22,11 +27,11 @@ public class MedicoDaoImpl implements MedicoDao {
 		String q=" Insert into Medico (matricola, nome, cognome, specializzazione, telefono) values (?,?,?,?,?)";
 		try {
 			ps = dbConn.getConnection().prepareStatement(q);
-			ps.setString(1, "matricola");
-			ps.setString(2, "nome");
-			ps.setString(3, "cognome");
-			ps.setString(4, "specializzazione");
-			ps.setString(5, "telefono");
+			ps.setString(1, m.getMatricola());
+			ps.setString(2, m.getNome());
+			ps.setString(3, m.getCognome());
+			ps.setString(4, m.getSpecializzazione());
+			ps.setString(5, m.getTelefono());
 			ps.executeQuery();
 		}
 		catch (SQLException e)
@@ -64,11 +69,11 @@ public class MedicoDaoImpl implements MedicoDao {
 		String q= "Update Medico set matricola=?, nome=?, cognome=?, specializzazione=?, telefono=?";
 		try {
 			ps = dbConn.getConnection().prepareStatement(q);
-			ps.setString(1, "matricola");
-			ps.setString(2, "nome");
-			ps.setString(3, "cognome");
-			ps.setString(4, "specializzazione");
-			ps.setString(5, "telefono");
+			ps.setString(1, m.getMatricola());
+			ps.setString(2, m.getNome());
+			ps.setString(3, m.getCognome());
+			ps.setString(4, m.getSpecializzazione());
+			ps.setString(5, m.getTelefono());
 			ps.executeQuery();
 		}
 		catch (SQLException e)
@@ -98,21 +103,24 @@ public class MedicoDaoImpl implements MedicoDao {
 	}
 
 	@Override
-	public List<Medico> visualizzaTutto() {
+	public List<Medico> visualizzaTutto() 
+	{
 		ArrayList <Medico> lista = new ArrayList <Medico> ();
 		String q="Select * From Medico";
-		Medico m = null;
+		
 		try 
 		{
+			
 			ps = DbConnection.getDbConnection().getConnection().prepareStatement(q);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 			{
-				ps.setString(1,"matricola");
-				ps.setString(2,"nome");
-				ps.setString(3,"cognome");
-				ps.setString(4,"specializzazione");
-				ps.setString(5,"telefono");
+				Medico m = new Medico();
+				m.setMatricola(rs.getString("matricola"));
+				m.setNome(rs.getString("nome"));
+				m.setCognome(rs.getString("cognome"));
+				m.setSpecializzazione(rs.getString("specializzazione"));
+				m.setTelefono(rs.getString("telefono"));
 				lista.add(m);
 			}
 		} 
@@ -124,4 +132,29 @@ public class MedicoDaoImpl implements MedicoDao {
 		return lista;
 
 	}
+	
+	public Medico visualizzaPerAmbito(String ambito) 
+	{
+		Medico m=null;
+		try
+		{
+			String q = "Select * from Medico m join Visita v on m.matricola=v.matricola_medico"
+					+ " join Reparto r on r.id_ambito=v.id_ambito "
+					+ " where ambito = ?";
+			ps = dbConn.getConnection().prepareStatement(q);
+			ps.setString(1, ambito);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next())
+			{
+				m=new Medico (rs.getString("matricola"),rs.getString("nome"), rs.getString("cognome"), rs.getString("specializzazione"), rs.getString("telefono"));
+			}
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return m;
+	}
+	
+	
 }

@@ -12,4 +12,5 @@ public interface UtenteDao {
 	public void elimina (String cf);
 	public List <Utente> visualizzaTutto();
 	public Utente logIn(String cf, String password);
+
 }
