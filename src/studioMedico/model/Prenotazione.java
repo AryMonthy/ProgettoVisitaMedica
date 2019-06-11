@@ -9,7 +9,17 @@ public class Prenotazione {
 	private String codice_visita;
 	private String cf;
 	private Date giorno;
+	private String descrizione;
 	
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
 	public Prenotazione()
 	{}
 
@@ -64,7 +74,7 @@ public class Prenotazione {
 	@Override
 	public String toString()
 	{
-		return "Prenotazione numero " + codice_prenotazione + " " + codice_visita + ", in data: " + giorno;
+		return "Visita prenotata: " + descrizione + ", prenotazione numero: " + codice_prenotazione + ", codice visita: " + codice_visita + ", data e ora: " + giorno;
 	}
 	
 	

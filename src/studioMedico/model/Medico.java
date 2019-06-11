@@ -7,6 +7,7 @@ public class Medico {
 	private String cognome;
 	private String specializzazione;
 	private String telefono;
+	private String descrizione;
 	
 	
 	public Medico ()
@@ -28,6 +29,17 @@ public class Medico {
 		this.specializzazione = specializzazione;
 		this.telefono = telefono;
 	}
+	
+	
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
 	public String getMatricola() 
 	{
 		return matricola;
@@ -75,7 +87,7 @@ public class Medico {
 	
 	public String toString ()
 	{
-		return "Il medico è: " + nome + " " + cognome + " reperibile al " + telefono; 
+		return "Il medico è: " + nome + " " + cognome + ", reperibile al " + telefono + ", effettua le seguenti visite: " + descrizione; 
 	}
 	
 }

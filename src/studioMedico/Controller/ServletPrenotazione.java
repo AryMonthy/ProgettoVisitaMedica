@@ -1,6 +1,9 @@
 package studioMedico.Controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,43 +11,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import studioMedico.model.Dao.PrenotazioneDao;
-import studioMedico.model.DaoImpl.PrenotazioneDaoImpl;
+import studioMedico.model.Medico;
+import studioMedico.model.Dao.MedicoDao;
+import studioMedico.model.DaoImpl.MedicoDaoImpl;
 
 
-/**
- * Servlet implementation class ServletPrenotazione
- */
 @WebServlet("/ServletPrenotazione")
 public class ServletPrenotazione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static PrenotazioneDao pt; 
-       
+    private static MedicoDao md;  
     
     public ServletPrenotazione() {
         super();
        
     }
 
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
-	public void init(ServletConfig config) throws ServletException 
+    public void init(ServletConfig config) throws ServletException 
 	{
-		ServletPrenotazione.pt=new PrenotazioneDaoImpl();
+    	ServletPrenotazione.md = new MedicoDaoImpl();
+	}
+	
+    
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	
+			String reparto = request.getParameter("reparto");
+			List<Medico> lm = md.visualizzaPerReparto(reparto);
+			request.setAttribute("listaVisite", lm);
+			RequestDispatcher d = request.getRequestDispatcher("./view/effettuaPrenotazione.jsp");
+			d.forward(request,response);
+	
+		
+		
 	}
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 

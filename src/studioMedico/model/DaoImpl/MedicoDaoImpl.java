@@ -133,16 +133,15 @@ public class MedicoDaoImpl implements MedicoDao {
 
 	}
 	
-	public Medico visualizzaPerAmbito(String ambito) 
+	@Override
+	public Medico visualizzaReparto(String reparto) 
 	{
 		Medico m=null;
 		try
 		{
-			String q = "Select * from Medico m join Visita v on m.matricola=v.matricola_medico"
-					+ " join Reparto r on r.id_ambito=v.id_ambito "
-					+ " where ambito = ?";
+			String q = "Select * from Medico m join Visita v on m.matricola=v.matricola_medico where reparto = ?";
 			ps = dbConn.getConnection().prepareStatement(q);
-			ps.setString(1, ambito);
+			ps.setString(1, reparto);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
@@ -155,6 +154,38 @@ public class MedicoDaoImpl implements MedicoDao {
 		}
 		return m;
 	}
-	
+
+	@Override
+	public List<Medico> visualizzaPerReparto(String reparto) 
+	{
+		ArrayList <Medico> lista = new ArrayList <Medico> ();
+		String q="Select * from Medico m join Visita v on m.matricola=v.matricola_medico where lower(reparto) = lower(?)";
+		
+		try 
+		{
+			
+			ps = DbConnection.getDbConnection().getConnection().prepareStatement(q);
+			ps.setString(1, reparto);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				Medico m = new Medico();
+				m.setMatricola(rs.getString("matricola"));
+				m.setNome(rs.getString("nome"));
+				m.setCognome(rs.getString("cognome"));
+				m.setSpecializzazione(rs.getString("specializzazione"));
+				m.setTelefono(rs.getString("telefono"));
+				m.setDescrizione(rs.getString("descrizione"));
+				lista.add(m);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}	
+
 	
 }

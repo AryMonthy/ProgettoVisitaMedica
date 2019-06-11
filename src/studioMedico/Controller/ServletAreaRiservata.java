@@ -19,20 +19,20 @@ import studioMedico.model.DaoImpl.UtenteDaoImpl;
  * Servlet implementation class StudioMedicoServlet
  */
 @WebServlet("/StudioMedicoServlet")
-public class StudioMedicoServlet extends HttpServlet {
+public class ServletAreaRiservata extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static UtenteDao ut;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudioMedicoServlet() {
+    public ServletAreaRiservata() {
         super();     
     }
     
     public void init(ServletConfig config) throws ServletException 
 	{
-		StudioMedicoServlet.ut= new UtenteDaoImpl();
+		ServletAreaRiservata.ut= new UtenteDaoImpl();
 	}
 
 	/**

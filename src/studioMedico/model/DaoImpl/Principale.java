@@ -30,16 +30,16 @@ public class Principale {
 //		}
 
 		
-		PrenotazioneDao pdao = new PrenotazioneDaoImpl();
-		List<Prenotazione> list = pdao.visualizzaTutto();
+		MedicoDaoImpl pdao = new MedicoDaoImpl();
 		
-		Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
-		calendar.setTime(list.get(0).getGiorno());   // assigns calendar to given date 
+		
+//		Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+//		calendar.setTime(list.get(0).getGiorno());   // assigns calendar to given date 
 		; // gets hour in 24h format
 //		calendar.get(Calendar.HOUR);        // gets hour in 12h format
 //		calendar.get(Calendar.MONTH);       // gets month number, NOTE this is zero based!
 		
-		System.out.println(calendar.get(Calendar.HOUR_OF_DAY));
+		System.out.println(pdao.visualizzaPerReparto("Dermatologia"));
 	}
 
 }

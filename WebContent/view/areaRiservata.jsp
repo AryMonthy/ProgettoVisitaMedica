@@ -18,17 +18,27 @@
 	<br>
 	
 	  <center> 
+	  
 	  <img src="http://www.dottrinalavoro.it/wp-content/uploads/2018/04/omino2.png" style="width:20%">
 	  <h1><%=request.getSession().getAttribute("nome")%> 
 	  <%=request.getSession().getAttribute("cognome")%> <br></h1>
 	  <h2><%=request.getSession().getAttribute("città")%> <br> </h2>
 	  <h4><%=request.getSession().getAttribute("telefono")%></h4>
-	  <a href=""> Le mie prenotazioni</a>
+	  
 	  </font>
 	  
 	  </center> 
 	
 </div>
-	 
+	<form action="./ServletStoricoPrenotazione" method="post">
+	<center><input type="submit" style="background-color: transparent; border-color: transparent; cursor: default;" value="Le mie prenotazioni">
+	</center>
+	</form>
+	
+	<form action="./ricercaReparto.html" method="post">
+	<center><input type="submit" style="background-color: transparent; border-color: transparent; cursor: default;" value="Prenota la tua visita">
+	</center>
+	</form>
+	
 	</body>
 </html>

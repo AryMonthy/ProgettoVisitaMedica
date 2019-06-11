@@ -120,6 +120,7 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 				p.setCodice_prenotazione(rs.getString("codice_prenotazione"));
 				p.setCodice_visita(rs.getString("codice_visita"));
 				p.setGiorno(rs.getDate("giorno"));
+		
 				lista.add(p);
 			}
 		} 
@@ -132,25 +133,32 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 	
 	}
 	
-	public Prenotazione miaPrenotazione (String cf) 
+	public List<Prenotazione> miaPrenotazione (String cf) 
 	{
-		Prenotazione p=null;
+		ArrayList <Prenotazione> lista = new ArrayList <Prenotazione> ();
+		String q = "Select * from Prenotazione p join Visita v on p.codice_visita=v.codice_visita where p.cf=?";
 		try
 		{
-			String q = "Select * from Prenotazione p join Utente u on u.cf=p.cf join Visita v on v.codice_visita=p.codice_visita where p.cf=?";
 			ps = dbConn.getConnection().prepareStatement(q);
 			ps.setString(1, cf);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
-				p= new Prenotazione (rs.getString("codice_prenotazione"), rs.getString("codice_visita"), rs.getString("cf"), rs.getDate("giorno"));
+				 Prenotazione p= new Prenotazione ();
+				 p.setCf(rs.getString("cf"));
+				 p.setCodice_prenotazione(rs.getString("codice_prenotazione"));
+				 p.setCodice_visita(rs.getString("codice_visita"));
+				 p.setGiorno(rs.getDate("giorno"));
+				 p.setDescrizione(rs.getString("descrizione"));
+				 
+				 lista.add(p);
 			}
 		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return p;
+		return lista;
 	
 	}
 	

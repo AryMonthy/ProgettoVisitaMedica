@@ -11,4 +11,5 @@ public interface VisitaDao {
 	public void aggiorna(Visita v);
 	public void elimina(String codice_visita);
 	public List<Visita> visualizzaTutto();
+	public List<Visita> leMieVisite (String cf);
 }

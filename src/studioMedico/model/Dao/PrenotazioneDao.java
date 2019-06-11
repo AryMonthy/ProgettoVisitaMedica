@@ -11,7 +11,7 @@ public interface PrenotazioneDao {
 	public void aggiorna(Prenotazione p);
 	public void elimina(String codice_prenotazione);
 	public List<Prenotazione> visualizzaTutto();
-	public Prenotazione miaPrenotazione (String cf);
+	public List<Prenotazione> miaPrenotazione (String cf);
 	
 	
 }

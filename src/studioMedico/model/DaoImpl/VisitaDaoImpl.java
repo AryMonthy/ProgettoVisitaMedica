@@ -60,7 +60,7 @@ public class VisitaDaoImpl implements VisitaDao {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
-				v=new Visita (rs.getString("codice_visita"), rs.getString("descrizione"), rs.getString("matricola_medico"));
+				v=new Visita (rs.getString("codice_visita"), rs.getString("descrizione"), rs.getString("matricola_medico"), rs.getString("reparto"));
 			}
 		}
 		catch (SQLException e) 
@@ -109,17 +109,14 @@ public class VisitaDaoImpl implements VisitaDao {
 	public List<Visita> visualizzaTutto() {
 		ArrayList <Visita> lista = new ArrayList <Visita> ();
 		String q="Select * From Visita";
-		Visita v = null;
+		
 		try 
 		{
 			ps = DbConnection.getDbConnection().getConnection().prepareStatement(q);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 			{
-				ps = dbConn.getConnection().prepareStatement(q);
-				ps.setString(1,v.getCodice_visita());
-				ps.setString(2, v.getDescrizione());
-				ps.setString(3,v.getMatricola_medico());
+				Visita v = new Visita (rs.getString("codice_visita"), rs.getString("descrizione"), rs.getString("matricola_medico"), rs.getString("reparto"));
 				lista.add(v);
 			}
 		} 
@@ -131,21 +128,24 @@ public class VisitaDaoImpl implements VisitaDao {
 		return lista;
 	}
 
-	public List<Visita> leMieVisite ()
+	public List<Visita> leMieVisite (String cf)
 	{
 		ArrayList <Visita> lista = new ArrayList <Visita> ();
-		String q="Select * From Visita v join Prenotazione p on v.codice_visita=p.codice_visita";
-		Visita v = null;
+		String q="Select * From Visita v join Prenotazione p on v.codice_visita=p.codice_visita where cf=?";
+		
+		
 		try 
 		{
 			ps = DbConnection.getDbConnection().getConnection().prepareStatement(q);
+			ps.setString(1, cf);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next())
 			{
+				Visita v = new Visita();
 				ps = dbConn.getConnection().prepareStatement(q);
-				ps.setString(1,v.getCodice_visita());
-				ps.setString(2, v.getDescrizione());
-				ps.setString(3,v.getMatricola_medico());
+				v.setCodice_visita(rs.getString("codice_prenotazione"));
+				v.setDescrizione(rs.getString("descrizione"));
+				v.setMatricola_medico(rs.getString("matricola_medico"));
 				lista.add(v);
 			}
 		} 

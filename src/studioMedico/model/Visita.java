@@ -1,22 +1,35 @@
 package studioMedico.model;
 
+
 public class Visita {
 
 	private String codice_visita;
 	private String descrizione;
 	private String matricola_medico;
+	private String reparto;
 	
 	
 	public Visita()
 	{}
 
-	public Visita(String codice_visita, String descrizione, String matricola_medico)
+	public Visita(String codice_visita, String descrizione, String matricola_medico, String reparto)
 	{
 		this.codice_visita = codice_visita;
 		this.descrizione = descrizione;
 		this.matricola_medico = matricola_medico;
+		this.reparto=reparto;
 	}
 	
+	public String getReparto() 
+	{
+		return reparto;
+	}
+
+	public void setReparto(String reparto)
+	{
+		this.reparto = reparto;
+	}
+
 	public String getCodice_visita()
 	{
 		return codice_visita;

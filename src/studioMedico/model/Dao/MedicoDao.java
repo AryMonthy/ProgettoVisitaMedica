@@ -11,4 +11,6 @@ public interface MedicoDao {
 	public void aggiorna(Medico m);
 	public void elimina(String matricola);
 	public List<Medico> visualizzaTutto();
+	public Medico visualizzaReparto(String reparto); 
+	public List<Medico> visualizzaPerReparto(String reparto); 
 }
