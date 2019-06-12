@@ -43,9 +43,7 @@
 		<td nowrap> ${cur.codice_prenotazione} </td> 
 		<td nowrap> ${cur.codice_visita} </td>
 		<td nowrap> ${cur.descrizione} </td>
-		<td nowrap> ${cur.giorno} </td>
-		
-		
+		<td nowrap> ${cur.giorno} </td>	
  	 </tr>
 	</c:forEach>
 </tbody>

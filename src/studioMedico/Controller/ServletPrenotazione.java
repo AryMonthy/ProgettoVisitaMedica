@@ -40,10 +40,7 @@ public class ServletPrenotazione extends HttpServlet {
 			List<Medico> lm = md.visualizzaPerReparto(reparto);
 			request.setAttribute("listaVisite", lm);
 			RequestDispatcher d = request.getRequestDispatcher("./view/effettuaPrenotazione.jsp");
-			d.forward(request,response);
-	
-		
-		
+			d.forward(request,response);	
 	}
 
 	

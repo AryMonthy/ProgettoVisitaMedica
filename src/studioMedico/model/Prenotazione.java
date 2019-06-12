@@ -1,6 +1,6 @@
 package studioMedico.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 public class Prenotazione {
@@ -11,14 +11,7 @@ public class Prenotazione {
 	private Date giorno;
 	private String descrizione;
 	
-	
-	public String getDescrizione() {
-		return descrizione;
-	}
 
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
 
 	public Prenotazione()
 	{}
@@ -31,6 +24,15 @@ public class Prenotazione {
 		this.giorno = giorno;
 	}
 
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
 	public String getCodice_prenotazione() 
 	{
 		return codice_prenotazione;

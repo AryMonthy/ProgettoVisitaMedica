@@ -16,8 +16,8 @@ public class Principale {
 //		UtenteDaoImpl cis=new UtenteDaoImpl ();
 		
 //		VisitaDaoImpl ns= new VisitaDaoImpl();
-//		java.util.Date d1 = new java.util.Date(1973, 10, 04);
-//		Date d = new Date(d1.getTime());
+		java.util.Date d1 = new java.util.Date(2019, 10, 04);
+		Date d = new Date(d1.getTime());
 //		Utente u = new Utente ("STRN98ST34NJT","Giorgio", "Capasso", d, "Sulmona", "3387613895", "francy" );
 //		PrenotazioneDaoImpl n= new PrenotazioneDaoImpl();
 //		cis.aggiungi(u);
@@ -30,7 +30,11 @@ public class Principale {
 //		}
 
 		
-		MedicoDaoImpl pdao = new MedicoDaoImpl();
+		PrenotazioneDaoImpl pdao = new PrenotazioneDaoImpl();
+		MedicoDaoImpl md= new MedicoDaoImpl();
+		//System.out.println(md.visualizzaPerReparto("Dermatologia"));
+		
+		
 		
 		
 //		Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
@@ -39,7 +43,7 @@ public class Principale {
 //		calendar.get(Calendar.HOUR);        // gets hour in 12h format
 //		calendar.get(Calendar.MONTH);       // gets month number, NOTE this is zero based!
 		
-		System.out.println(pdao.visualizzaPerReparto("Dermatologia"));
+		
 	}
 
 }

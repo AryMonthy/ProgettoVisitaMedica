@@ -1,5 +1,6 @@
 package studioMedico.model.Dao;
 
+import java.util.Date;
 import java.util.List;
 
 import studioMedico.model.Prenotazione;
@@ -12,6 +13,7 @@ public interface PrenotazioneDao {
 	public void elimina(String codice_prenotazione);
 	public List<Prenotazione> visualizzaTutto();
 	public List<Prenotazione> miaPrenotazione (String cf);
+	public int numeroPrenotazioni(String codice_visita, Date giorno);
 	
 	
 }

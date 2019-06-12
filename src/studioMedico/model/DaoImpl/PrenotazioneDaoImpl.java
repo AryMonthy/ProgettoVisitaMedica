@@ -1,6 +1,6 @@
 package studioMedico.model.DaoImpl;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,14 +26,15 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 	@Override
 	public void aggiungi(Prenotazione p)
 	{
-		String q=" Insert into Prenotazione (codice_prenotazione, codice_visita, cf, specializzazione, telefono) values (?,?,?,?)";
+		String q=" Insert into Prenotazione values (codice_prenotazione.nextval,?,?,?)";
 		try {
 			ps = dbConn.getConnection().prepareStatement(q);
-			ps.setString(1, p.getCodice_prenotazione());
-			ps.setString(2, p.getCodice_visita());
-			ps.setString(3, p.getCf());
-			ps.setDate(4,(Date)p.getGiorno());
+			ps.setString(1, p.getCodice_visita());
+			ps.setString(2, p.getCf());
+			java.sql.Date r=new java.sql.Date(p.getGiorno().getTime());
+			ps.setDate(3,r);
 			ps.executeQuery();
+			ps.close();
 		}
 		catch (SQLException e)
 		{
@@ -75,7 +76,8 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 			ps.setString(1, p.getCodice_prenotazione());
 			ps.setString(2, p.getCodice_visita());
 			ps.setString(3, p.getCf());
-			ps.setDate(4,(Date)p.getGiorno());
+			java.sql.Date r=new java.sql.Date(p.getGiorno().getTime());
+			ps.setDate(4,r);
 			ps.executeQuery();
 		}
 		catch (SQLException e)
@@ -142,7 +144,7 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 			ps = dbConn.getConnection().prepareStatement(q);
 			ps.setString(1, cf);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next())
+			while (rs.next())
 			{
 				 Prenotazione p= new Prenotazione ();
 				 p.setCf(rs.getString("cf"));
@@ -161,6 +163,37 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 		return lista;
 	
 	}
+
+
+	@Override
+	public int numeroPrenotazioni(String codice_visita, Date giorno) 
+	{
+		int ris=-1;
+		//String q="select count (codice_visita, giorno) conteggio from prenotazione Group by codice_visita,giorno having codice_visita=?";
+		String q="select giorno,count(*) conteggio from prenotazione where giorno=? and codice_visita=? group by giorno";
+		
+		try 
+		{
+			ps = dbConn.getConnection().prepareStatement(q);
+			java.sql.Date r=new java.sql.Date(giorno.getTime());
+			ps.setDate(1,r);
+			ps.setString(2, codice_visita);
+			ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				ris= rs.getInt("conteggio");
+			}
+			
+		} 
+		catch (SQLException e) 
+		{
+			
+			e.printStackTrace();
+		}
+		return ris;
+	}
+	
 	
 
 }

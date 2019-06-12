@@ -9,6 +9,9 @@
 	</head>
 	<body>
 	<body bgcolor="#fOfffO">
+	<a href="./Index.html">
+		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVGGWA-obL6jTnT4SNdShiI-3zc4plxKM3JCyZ2-QVoV2tlWb8lQ" align="left" width="40" height="45" >
+	</a>
 	<h1> <center><font face="Tw Cen MT Condensed" color="#OOOOOO">  Benvenuto </center> </h1>
 	
 	<div class="card">
@@ -39,6 +42,7 @@
 	<center><input type="submit" style="background-color: transparent; border-color: transparent; cursor: default;" value="Prenota la tua visita">
 	</center>
 	</form>
+
 	
 	</body>
 </html>

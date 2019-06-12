@@ -9,13 +9,23 @@
 	</head>
 	<body>
 
-
+	<form action="./ServletEsitoPrenotazione">
 	<c:forEach var="cur" items="${listaVisite}"> 
 	
+		<input type="radio" name="seleziona" value="${cur.codice_visita}" checked>
 		${cur.descrizione}
 		${cur.nome}
 		${cur.cognome}
-		
+		<br>
 	</c:forEach>
+	
+	
+	<input type="date" name="d" max="2019-12-31"><br><br>
+	
+	<input type ="submit" value="Prenota">
+	
+	
+	</form>
+	
 	</body>
 </html>

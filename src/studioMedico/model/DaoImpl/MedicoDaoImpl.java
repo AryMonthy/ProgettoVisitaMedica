@@ -176,6 +176,7 @@ public class MedicoDaoImpl implements MedicoDao {
 				m.setSpecializzazione(rs.getString("specializzazione"));
 				m.setTelefono(rs.getString("telefono"));
 				m.setDescrizione(rs.getString("descrizione"));
+				m.setCodice_visita(rs.getString("codice_visita"));
 				lista.add(m);
 			}
 		} 

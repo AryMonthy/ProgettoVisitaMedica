@@ -8,8 +8,11 @@ public class Medico {
 	private String specializzazione;
 	private String telefono;
 	private String descrizione;
+	private String codice_visita;
 	
 	
+	
+
 	public Medico ()
 	{}
 	
@@ -31,6 +34,13 @@ public class Medico {
 	}
 	
 	
+	public String getCodice_visita() {
+		return codice_visita;
+	}
+
+	public void setCodice_visita(String codice_visita) {
+		this.codice_visita = codice_visita;
+	}
 	
 	public String getDescrizione() {
 		return descrizione;
